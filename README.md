@@ -1,1 +1,1 @@
-# TP
+Hola, somos los alumnos Martín Guerrero y Lara Scazzola, el juego que vamos a hacer va a ser el estratega. https://es.wikihow.com/jugar-al-Stratego. Acá hay un link en el que se explican bien las reglas del juego. Los patrones de diseño que elegimos para hacer este juego van a ser el Command, porque nos va a permitir configurar el movimiento de las fichas del juego. El otro patrón de diseño, va a ser el Strategy, porque nos permite relacionar los distintos tipos de fichas que difieren solo en su comportamiento.
