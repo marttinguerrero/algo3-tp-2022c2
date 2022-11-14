@@ -35,7 +35,7 @@ public class JugadorRobot implements java.io.Serializable , Jugador{
 		posYi = posFicha[0];
 		
 		int[] movimientoPosible = null;
-		//int[] posFichaComputadora = tablero.obtenerFicha(posXi, posYi).movimientoPosible(posXi, posYi, tablero);
+		
 		while (posFichas.size() != 0 || movimientoPosible == null) {
 			System.out.print("entra al bucle para buscar un movimiento posible\n");
 			tablero.imprimirFichasEnEsasPosiciones(posFichas);
