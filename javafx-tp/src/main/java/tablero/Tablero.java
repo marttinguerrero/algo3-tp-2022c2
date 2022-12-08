@@ -13,14 +13,15 @@ public class Tablero implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	public int TAM_TABLERO = 10;
 	public static final Ficha VACIO = null;
-	//public static final Ficha PROHIBIDO = null;
 	public static final Ficha AGUA = new Ficha(null, TipoDeFicha.AGUA, null, null, null);
 	private Ficha[][] tablero;
 	Partida partida = new Partida();
 	private String enfrentamiento = null;
 	
-
 	
+	
+	//Este es el constructor de la clase Tablero y lo que hace es recibir dos listas de fichas, una de cada jugador, e ir ubicando las piezas
+	//de manera que queden las piezas del mismo jugador ubicadas en el mismo sector del tablero.
 	public Tablero(ArrayList<Ficha> fichasVerdes, ArrayList<Ficha> fichasAzules) {
 		
 		this.tablero = new Ficha[TAM_TABLERO][TAM_TABLERO];
@@ -45,8 +46,6 @@ public class Tablero implements java.io.Serializable{
 	}
 	
 
-	
-	@SuppressWarnings("unlikely-arg-type")
 	public ArrayList<int[]> obtenerFichasDeUnJugador(Jugador jugador) {
 		ArrayList<int[]> posFichasDelJugador = new ArrayList<int[]>();
 
@@ -69,11 +68,13 @@ public class Tablero implements java.io.Serializable{
 		return enfrentamiento;
 	}
 
+	//Esta función retorna true si se pudo rotar con éxito una pieza, lanza una excepción si una de las piezas clickeadas es del
+	//otro jugador o si trata de mover una pieza hacia delante, pero todavía no se terminó de hacer la estrategia.
 	public boolean rotarFicha(int posXi, int posYi, int posXf, int posYf, Jugador jugador) throws ExcepcionTurnoEquivocado {
 		Ficha aMover = tablero[posXi][posYi];
 		Ficha aComer = tablero[posXf][posYf];
 		
-		if (!validarAMoverPertenescaAJugadorEnTurno(aMover, jugador)) {
+		if (!validarAMoverPertenezcaAJugadorEnTurno(aMover, jugador)) {
 			throw new excepciones.ExcepcionTurnoEquivocado();
 		}
 		
@@ -112,7 +113,7 @@ public class Tablero implements java.io.Serializable{
 		return true;
 	}
 	
-	private boolean validarAMoverPertenescaAJugadorEnTurno(Ficha ficha, Jugador jugador) {
+	private boolean validarAMoverPertenezcaAJugadorEnTurno(Ficha ficha, Jugador jugador) {
 		if (ficha.obtenerJugador().equals(jugador)) {
 			return true;
 		}
@@ -120,6 +121,11 @@ public class Tablero implements java.io.Serializable{
 	}
 	
 
+	//Esta función se encarga de que se muevan las piezas. Si la pieza aMover puede comer a la pieza aComer entonces la come, sino pierde
+	// o empata, depende el caso, siempre poniendo en null el casillero en el que estaba la pieza aMover. 
+	//Además si se intenta hacer un movimiento inválido o se clickea piezas del rival lanza excepciones.
+	//También si en el lugar que al que se mueve la pieza no hay nada se mueve correctamente.
+	
 	public boolean moverFicha(int posXi, int posYi, int posXf, int posYf, Jugador jugador) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado{
 		Ficha aMover = tablero[posXi][posYi];
 		Ficha aComer = tablero[posXf][posYf];
@@ -128,7 +134,7 @@ public class Tablero implements java.io.Serializable{
 			throw new excepciones.ExcepcionPosicionInvalida();
 		}
 		
-		if (!validarAMoverPertenescaAJugadorEnTurno(aMover, jugador)) {
+		if (!validarAMoverPertenezcaAJugadorEnTurno(aMover, jugador)) {
 			throw new excepciones.ExcepcionTurnoEquivocado();
 		}
 		
@@ -161,33 +167,7 @@ public class Tablero implements java.io.Serializable{
 	}
 	
 
-//	public static double obtenerNumeroAlAzar(double min, double max){
-//	    double x = (int)(Math.random()*((max-min)+1))+min;
-//	    return x;
-//}
 
-//	public boolean moverFichaIA(int posXi, int posYi, int posXf, int posYf, JugadorRobot jugador) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado{
-//		System.out.println("Estoy en moverFicha del jugadorRobot en el tablero");
-//		posXi = (int) obtenerNumeroAlAzar(0, 9);
-//		posYi = (int) obtenerNumeroAlAzar(0, 9);
-//		Ficha aMover = obtenerFicha(posXi, posYi);
-//		while (aMover == null || aMover.obtenerJugador() != jugador) {
-//			posXi = (int) obtenerNumeroAlAzar(0, 9);
-//			posYi = (int) obtenerNumeroAlAzar(0, 9);
-//			aMover = obtenerFicha(posXi, posYi);
-//		}
-//		posXf = (int) obtenerNumeroAlAzar(0, 9);
-//		posYf = (int) obtenerNumeroAlAzar(0, 9);
-//		while(moverFicha(posXi, posYi, posXf, posYf, jugador) != true) {
-//			posXf = (int) obtenerNumeroAlAzar(0, 9);
-//			posYf = (int) obtenerNumeroAlAzar(0, 9);
-//			moverFicha(posXi, posYi, posXf, posYf, jugador);
-//			
-//		}
-//		return false;
-//	}
-//	
-	
 	public boolean posicionDelTableroVacia(int pos_i, int pos_j) {
 		return tablero[pos_i][pos_j] == VACIO;
 	}

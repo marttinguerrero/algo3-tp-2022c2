@@ -32,18 +32,14 @@ public class App extends Application {
 	
 	Media sound;
 	File f = new File("src/main/java/partidaContraJugador.csv");
-//	File f1 = new File("src/main/java/partidaContraIA.csv");
 	String sonido = "res/sonidoFondo.wav";
 
-    @SuppressWarnings("null")
-	@Override
     public void start(Stage stage) {
-//    	sound = new Media(getClass().getResource("res/sonidoFondo.wav").toExternalForm());
-//    	new MediaPlayer(sound).setAutoPlay(true);
-//    	new MediaPlayer(sound).play();
+    	sound = new Media(getClass().getResource(sonido).toExternalForm());
+    	new MediaPlayer(sound).setAutoPlay(true);
+    	new MediaPlayer(sound).play();
     	Vista vista = new Vista(stage);
-//    	vista.insertarSonido(sonido);
-//    	vista.insertarSonido();
+    	vista.insertarSonido(sonido);
     	Controlador controlador = new Controlador(vista);
     	vista.dibujarMenu(stage);
     	

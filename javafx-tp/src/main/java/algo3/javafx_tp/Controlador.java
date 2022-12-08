@@ -1,7 +1,5 @@
 package algo3.javafx_tp;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import partida. *;
 
 import java.io.File;
@@ -14,7 +12,6 @@ import excepciones.ExcepcionTurnoEquivocado;
 
 public class Controlador {
 	private Vista vista;
-	Media sound;
 	private static Partida partida;
 	private boolean esTurnoIA = false;
 	boolean jugadorEstrategia1 = false;
@@ -35,6 +32,11 @@ public class Controlador {
 		this.partida = partida;
 	}
 		
+	//Selecciona las casillas en donde hace click el jugador, si el jugador 1 no terminó de hacer la estrategia, entonces el jugador 1
+	//debe armar su estrategia, una vez que la termina la hace el jugador 2 si la partida es contra un jugador humano sino empieza la partida.
+	//Ante cualquier movimiento inválido salta el aviso, sino se mueve la pieza indicando si se come alguna pieza.
+	
+	
 	public void seleccionarCasilla(int posX, int posY) {
 		if (casillaSelecionada == null) {
 			casillaSelecionada = new int[2];
@@ -49,13 +51,10 @@ public class Controlador {
 				try {
 					partida.armarEstrategiaJugador1(casillaSelecionada[1], casillaSelecionada[0], posY, posX);
 				} catch (ExcepcionPosicionInvalida e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarPosicionInvalida();
 				} catch (ExcepcionTurnoEquivocado e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarTurnoEquivocado();
 				} catch (ExcepcionMovimientoInvalido e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarMovimientoInvalido();
 				}
 				casillaSelecionada = null;
@@ -64,12 +63,9 @@ public class Controlador {
 				try {
 					partida.armarEstrategiaJugador2(casillaSelecionada[1], casillaSelecionada[0], posY, posX);
 					
-//					vista.mostrarAvisoEnfrentamiento();
 				} catch (ExcepcionPosicionInvalida e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarPosicionInvalida();
 				} catch (ExcepcionTurnoEquivocado e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarTurnoEquivocado();
 				} catch (ExcepcionMovimientoInvalido e) {
 					vista.avisarMovimientoInvalido();
@@ -85,16 +81,12 @@ public class Controlador {
 					}
 					
 				} catch (ExcepcionPosicionInvalida e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarPosicionInvalida();
 				} catch (ExcepcionTurnoEquivocado e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarTurnoEquivocado();
 				} catch (ExcepcionMovimientoInvalido e) {
-//					vista.insertarSonidoInvalido();
 					vista.avisarMovimientoInvalido();
 				}
-//				vista.avisarEnfrentamientos();
 				
 				esTurnoIA = true;
 				casillaSelecionada = null;
@@ -102,6 +94,8 @@ public class Controlador {
 		}
 	}	
 	
+	
+		
 	
 		private int obtenerIndiceTablero(double coordenadaPixel) {
 			return (int) (coordenadaPixel / vista.obtenerTamañoDeCasilla());
@@ -114,6 +108,9 @@ public class Controlador {
 		}
 
 
+		//Con está función arranca la partida, en está función están los distintos tipos de clicks, en el tablero y en el manú de costado.
+		//En el tablero para mover la piezas y en el menú de costado para guardar las estrategias o la partida.
+		
   		public void iniciarPartida() {
 		    
 	    	

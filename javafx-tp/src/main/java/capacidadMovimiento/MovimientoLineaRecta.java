@@ -12,7 +12,8 @@ public class MovimientoLineaRecta implements CapacidadMovimiento , java.io.Seria
 	private static final long serialVersionUID = 1L;
 
 
-	
+	//Esta función chequea los movimientos de la pieza número 2 que puede moverse libremente en linea recta, siempre y cuando no haya otra
+	//pieza en su camino. Se fija que si se mueve en el eje X no se mueva en el eje Y, lo mismo viceversa, sino retorna false.
 	public boolean validarMovimiento(int posXi, int posYi, int posXf, int posYf, Tablero tablero) {
 		Ficha aMover = tablero.obtenerFicha(posXi, posYi);
 		Ficha aComer = tablero.obtenerFicha(posXf, posYf);
@@ -25,25 +26,20 @@ public class MovimientoLineaRecta implements CapacidadMovimiento , java.io.Seria
 		}
 		
 		if (!((movimientosEnX == 0 && movimientosEnY != 0) ||(movimientosEnX != 0 && movimientosEnY == 0))) {
-//			System.out.print(String.format("Entra en false porque aprieta la misma casilla \n",null));
 			return false;
 		}
 		
 		if (movimientosEnY == 0) {
-//			System.out.println("Entra a movimiento en x");
 			for (int i = 0; i < (movimientosEnX - 1); i++) {
 				if (tablero.obtenerFicha(posXi + (((posXf - posXi) /java.lang.Math.abs(posXf - posXi)) + i*((posXf - posXi) /java.lang.Math.abs(posXf - posXi))), posYi) != Tablero.VACIO) {
-					//System.out.print(String.format("Entra en false porque se quiso mover en X y habia una ficha en medio \n",null));
 					return false;
 				}
 			}
 		}
 		
 		if (movimientosEnX == 0) {
-//			System.out.println("Entra a movimiento en y");
 			for (int i = 0; i < (movimientosEnY - 1); i++) {
 				if (tablero.obtenerFicha(posXi , posYi + ((posYf - posYi) /java.lang.Math.abs(posYf - posYi)) + i) != Tablero.VACIO) {
-//					System.out.print(String.format("Entra en false porque se quiso mover en Y y habia una ficha en medio \n",null));
 					return false;
 				}
 			}
@@ -53,6 +49,9 @@ public class MovimientoLineaRecta implements CapacidadMovimiento , java.io.Seria
 	}
 	
 	
+	
+	//Esta función se usa para ver los movimientos posibles que tiene una pieza. Esta función se usa para el jugadorRobot, para que encuentre 
+	//movimientos posibles de una pieza elegida de manera random.
 	public int[] movimientoPosible(int posXi, int posYi, Tablero tablero) {
 		
 		

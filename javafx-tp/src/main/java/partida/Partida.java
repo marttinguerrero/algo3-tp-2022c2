@@ -8,10 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
-//import java.io.ObjectInputStream;
-//import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +25,8 @@ public class Partida implements Serializable{
 	private Jugador jugador2;
 	private Tablero tablero;
 	private Jugador jugadorEnTurno;
+
+	
 	
 	public Partida(Jugador jugador1, Jugador jugador2) {
 		this.jugador1 = jugador1;
@@ -53,6 +51,8 @@ public class Partida implements Serializable{
 		
 	}
 	
+	
+	//Esta función guarda en un archivo que se le pasa por parámetro el estado de la partida.
 	public boolean guardarPartida(File nombreArchivo, Partida partida) throws IOException {
 		
 		try (FileOutputStream fileOutputStream = new FileOutputStream(nombreArchivo)){
@@ -70,6 +70,7 @@ public class Partida implements Serializable{
 		
 	}
 	
+	//Esta función carga un archivo que recibe por parámetro para continuar con una partida empezada
 	public Partida cargarPartida(File nombreArchivo, Partida partida) throws IOException, ClassNotFoundException {
 		try(FileInputStream fileInputStream = new FileInputStream(nombreArchivo)){
 		
@@ -89,7 +90,6 @@ public class Partida implements Serializable{
 	}
 	
 	public boolean armarEstrategiaJugador1(int posXi, int posYi, int posXf, int posYf) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado{
-		//System.out.print(String.format("Entra a armar la estrategia el jugador 1 con xi = %d, yi = %d, xf= %d, yf= %d \n", posXi, posYi, posXf, posYf));
 		jugador1.armarEstrategiaJugador1(posXi, posYi, posXf, posYf, tablero);
 		return true;
 	}
@@ -100,6 +100,8 @@ public class Partida implements Serializable{
 	}
 	
 	
+	
+	//Esta función inicializa todas las fichas de un jugador y retorna el array de Fichas.
 	public ArrayList<Ficha> inicializarFichas(Color color, Jugador jugador) {
 		ArrayList<Ficha> fichas =  new ArrayList<Ficha>();
 		FabricaDeFichas fabricaDeFichas = new FabricaDeFichas();
@@ -136,19 +138,7 @@ public class Partida implements Serializable{
 		
 	}
 	
-//	public String getAviso() {
-//		System.out.println(aviso);
-//		return aviso;
-//	}
-//
-//	public void setAviso(String aviso) {
-//		this.aviso = aviso;
-//	}
-	
-	
-//	public void mostrarAviso() {
-//		System.out.println(getAviso());
-//	}
+
 	
 	public String huboEnfrentamiento() {
 		return tablero.huboEnfrentamiento();
@@ -166,13 +156,7 @@ public class Partida implements Serializable{
 
 	}
 	
-	/*public void comenzarPartida() {
-		while(!jugador1.perdio() && !jugador2.perdio()) {
-			while (!jugadorEnTurno.moverFicha(posXi, posYi, posXf, posYf, tablero)) {
-				}
-			}
-			actualizarTurno();
-		}*/
+
 
 	public boolean terminar() {
 		if(jugador1.perdio() || jugador2.perdio()) {

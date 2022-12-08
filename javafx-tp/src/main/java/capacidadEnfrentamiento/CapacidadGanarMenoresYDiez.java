@@ -7,6 +7,9 @@ public class CapacidadGanarMenoresYDiez implements CapacidadEnfrentamiento , jav
 	
 	private static final long serialVersionUID = 1L;
 
+	//Esta función retorna el resultado de un enfrentamiento entre dos piezas. Retorna que perdió si el valor de la otra pieza es mayor,
+	//exceptuando el 10, retorna que ganó si el valor de la otra pieza es menor o es 10 y retorna que empató si tienen el mismo valor.
+	
 	public ResultadoEnfrentamiento enfrentar(Ficha ficha, Ficha fichaOponente) {
 		if (fichaOponente.obtenerValor() == TipoDeFicha.DIEZ.valor || ficha.obtenerValor() > fichaOponente.obtenerValor()) {
 			fichaOponente.obtenerJugador().perderFicha(fichaOponente);

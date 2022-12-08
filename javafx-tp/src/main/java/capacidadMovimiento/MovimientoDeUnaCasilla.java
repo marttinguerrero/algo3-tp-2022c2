@@ -11,7 +11,8 @@ public class MovimientoDeUnaCasilla implements CapacidadMovimiento , java.io.Ser
 	private static final long serialVersionUID = 1L;
 
 
-	
+	//Valida el movimiento de las piezas que se mueven de a un lugar si una pieza se mueve a más de un lugar en el eje X o Y
+	// retorna false. 
 	public boolean validarMovimiento(int posXi, int posYi, int posXf, int posYf, Tablero tablero) {
 
 		Ficha aMover = tablero.obtenerFicha(posXi, posYi);
@@ -32,11 +33,12 @@ public class MovimientoDeUnaCasilla implements CapacidadMovimiento , java.io.Ser
 	}
 
 	
+	//Esta función se usa para ver los movimientos posibles que tiene una pieza. Esta función se usa para el jugadorRobot, para que encuentre 
+	//movimientos posibles de una pieza elegida de manera random.
 	public int[] movimientoPosible(int posXi, int posYi, Tablero tablero) {
 		
 		
 		
-		//System.out.print(String.format("entra la ficha %d para buscar mov posibles\n", tablero.obtenerFicha(posXi, posYi).obtenerValor()));
 		ArrayList<int[]> movimientosPosibles = new ArrayList<int[]>();
 		
 		System.out.print(String.format("La posicion inicial de la pieza es %d %d \n", posXi,posYi));
@@ -61,10 +63,6 @@ public class MovimientoDeUnaCasilla implements CapacidadMovimiento , java.io.Ser
 		movimientosPosibles.add(pos3);
 		
 		
-//		System.out.print(String.format("Un movimiento posible es %d %d\n", movimientosPosibles.get(0)[0],movimientosPosibles.get(0)[1]));
-//		System.out.print(String.format("Un movimiento posible es %d %d\n", movimientosPosibles.get(1)[0],movimientosPosibles.get(1)[1]));
-//		System.out.print(String.format("Un movimiento posible es %d %d\n", movimientosPosibles.get(2)[0],movimientosPosibles.get(2)[1]));
-//		System.out.print(String.format("Un movimiento posible es %d %d\n", movimientosPosibles.get(3)[0],movimientosPosibles.get(3)[1]));
 		
 		for (int i = 0; i < movimientosPosibles.size(); i++) {
 			int[] pos = movimientosPosibles.get(i);

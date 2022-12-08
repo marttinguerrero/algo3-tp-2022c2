@@ -23,21 +23,14 @@ public class Ficha implements java.io.Serializable{
 		this.capacidadMovimiento = capacidadMovimiento;
 		this.capacidadEnfrentamiento = capacidadEnfrentamiento;
 		this.jugador = jugador;
-//		System.out.print(String.format("se crea ficha con jugador: %s\n", jugador.obtenerNombre()));
 	}
 	
-//	public void imprimirFicha() {
-//		System.out.print(tipoDeFicha.valor);
-//	}
-	
+
 	public Jugador obtenerJugador() {
 		return jugador;
 	}
 	
-	public void imprimirFicha() {
-		System.out.print(String.format("El valor de la ficha es: %d\n", tipoDeFicha.valor));
-		System.out.print(String.format("El jugador al que le pertenece es: %s\n", jugador.obtenerNombre()));
-	}
+
 	
 	public boolean validarMovimiento(int posXi, int posYi, int posXf, int posYf, Tablero tablero) {
 		return capacidadMovimiento.validarMovimiento(posXi, posYi, posXf, posYf, tablero);

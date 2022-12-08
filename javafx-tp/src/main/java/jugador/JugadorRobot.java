@@ -26,40 +26,37 @@ public class JugadorRobot implements java.io.Serializable , Jugador{
 		this.colorFichas = color;
 	}
 	
-public static double obtenerNumeroAlAzar(double min, double max){
-	    double x = (int)(Math.random()*((max-min)+1))+min;
-	    return x;
-}
-public Color obtenerColor() {
-	return colorFichas;
-}
 
-
-
-
-public String obtenerNombre() {
-	return nombre;
-}
-
-
-public boolean armarEstrategiaJugador1(int posXi, int posYi, int posXf, int posYf, Tablero tablero) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado {
-	System.out.print(String.format("Entra a armar la estrategia el jugador 1 con xi = %d, yi = %d, xf= %d, yf= %d \n", posXi, posYi, posXf, posYf));
-	if (!(tablero.validarPosicionCampoJugador1(posXi, posYi) && tablero.validarPosicionCampoJugador1(posXf, posYf))) {
-		throw new excepciones.ExcepcionPosicionInvalida();
+	public Color obtenerColor() {
+		return colorFichas;
 	}
-	return tablero.rotarFicha(posXi, posYi, posXf, posYf, this);
-}
 
 
-public boolean armarEstrategiaJugador2(int posXi, int posYi, int posXf, int posYf, Tablero tablero) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado {
-	System.out.print(String.format("Entra a armar la estrategia el jugador 1 con xi = %d, yi = %d, xf= %d, yf= %d \n", posXi, posYi, posXf, posYf));
-	if (!(tablero.validarPosicionCampoJugador2(posXi, posYi) && tablero.validarPosicionCampoJugador2(posXf, posYf))) {
-		throw new excepciones.ExcepcionPosicionInvalida();
+
+
+	public String obtenerNombre() {
+		return nombre;
 	}
-	return tablero.rotarFicha(posXi, posYi, posXf, posYf, this);
-}
 
-public boolean moverFicha(int posXi, int posYi, int posXf, int posYf, Tablero tablero) {
+
+	public boolean armarEstrategiaJugador1(int posXi, int posYi, int posXf, int posYf, Tablero tablero) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado {
+		if (!(tablero.validarPosicionCampoJugador1(posXi, posYi) && tablero.validarPosicionCampoJugador1(posXf, posYf))) {
+			throw new excepciones.ExcepcionPosicionInvalida();
+		}
+		return tablero.rotarFicha(posXi, posYi, posXf, posYf, this);
+	}
+
+
+	public boolean armarEstrategiaJugador2(int posXi, int posYi, int posXf, int posYf, Tablero tablero) throws ExcepcionMovimientoInvalido, ExcepcionPosicionInvalida, ExcepcionTurnoEquivocado {
+		if (!(tablero.validarPosicionCampoJugador2(posXi, posYi) && tablero.validarPosicionCampoJugador2(posXf, posYf))) {
+			throw new excepciones.ExcepcionPosicionInvalida();
+		}
+		return tablero.rotarFicha(posXi, posYi, posXf, posYf, this);
+	}
+
+	//Esta función crea una lista con las fichas de la IA, para después elegir una pieza ficha al azar de esa lista y fijarse si tiene movimiento posibles,
+	//si los tiene se hace el movimiento, sino busca otra pieza, así hasta que encuentre una con un movmiento posible.
+	public boolean moverFicha(int posXi, int posYi, int posXf, int posYf, Tablero tablero) {
 		
 		ArrayList<int[]> posFichas = tablero.obtenerFichasDeUnJugador(this);
 		java.util.Random random = new java.util.Random();
@@ -80,7 +77,6 @@ public boolean moverFicha(int posXi, int posYi, int posXf, int posYf, Tablero ta
 				posFichas.remove(posicionRandom);
 				posXicompu = posFicha[0];
 				posYicompu = posFicha[1];
-//				System.out.print(String.format("Se obtuvo la pieza %d %d \n", posXicompu, posYicompu));
 				movimientoPosible = tablero.obtenerFicha(posXicompu, posYicompu).movimientoPosible(posXicompu, posYicompu, tablero);
 				
 			}
@@ -88,7 +84,6 @@ public boolean moverFicha(int posXi, int posYi, int posXf, int posYf, Tablero ta
 			int posYfcompu = movimientoPosible[1];
 
 
-//			System.out.print(String.format("Se obtuvo la ficha %d %d y se va a mover hacia %d %d\n", posXicompu,posYicompu,posXfcompu,posYfcompu ));
 			if(tablero.moverFicha(posXicompu, posYicompu, posXfcompu, posYfcompu, this)) {
 				return true;
 			}

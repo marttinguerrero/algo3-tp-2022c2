@@ -39,7 +39,6 @@ public class Vista{
 	private Button botonComputadora;
 	private Button botonCargarPartidaContraJugador;
 	private Button botonIngresarNombres;
-	private Button botonCargarPartidaContraIA;	
 	private TextField campoNombre1 ;
 	private TextField campoNombre2;
 
@@ -68,7 +67,6 @@ public class Vista{
 	private final int UBICACION_Y_AVISOS = 200;
 	
 	//TEXTURAS TABLERO
-	//private final Image PASTO = new Image(getClass().getResourceAsStream("res/texturaPasto2.jpg"));
 	private final Image AGUA = new Image(getClass().getResourceAsStream("res/texturaAgua1.jpeg"));
 	private final Image MOSAICO = new Image(getClass().getResourceAsStream("res/mosaico1.png"), TAM_CASILLA, TAM_CASILLA, false, false);
 	
@@ -107,7 +105,6 @@ public class Vista{
 	//TITULO
 	private final Image TITULO = new Image(getClass().getResourceAsStream("res/Titulo1.png"), 100, 400, false, false);
 	
-	//atributos
 	Partida partida;
 	Stage stage;
 	Scene scene;
@@ -135,7 +132,7 @@ public class Vista{
 	}
 	
 	
-	//si hago mvc no se si deberia ser 
+	
 	private Image obtenerImagenDeFicha(TipoDeFicha tipoDeFicha, ficha.Color color) {
 		
 		if (color.equals(ficha.Color.AZUL)) {
@@ -211,7 +208,8 @@ public class Vista{
 		return null;
 	}
 	
-public void terminarPartida(String nombre_ganador) {
+	//Esta función dibuja el canvas de cuando ya terminó la partida, indicando que jugador ganó.
+	public void terminarPartida(String nombre_ganador) {
 		
 		Canvas canvasFinDePartida = new Canvas(500, 500);	
 		GraphicsContext contextoCanvasFinDePartida = canvasFinDePartida.getGraphicsContext2D();
@@ -272,17 +270,8 @@ public void terminarPartida(String nombre_ganador) {
 		this.aviso = enfrentamiento;
 	}
 	
-//	public String obtenerAviso() {
-////		System.out.println(partida.getAviso());
-//		return partida.getAviso();
-//	}
 	
-//	public void avisarEnfrentamiento() {
-//		Aviso avisoo = new Aviso();
-//		this.aviso = avisoo.getAviso();
-//	}
-
-	
+	//Esta función dibuja el canvas con el tablero en la pantalla.
 	private void dibujarTablero(Tablero tablero, GraphicsContext contextoCanvas) {
 		  
        	for (int i = 0; i < 10; i++) {
@@ -311,7 +300,9 @@ public void terminarPartida(String nombre_ganador) {
     	}
 
 	}
-	
+
+	//Esta función dibuja el menu del costado en donde está el título del juego y las opciones de guardar estrategias de los jugadores 
+	//y de guardar la partida.
 	public void dibujarMenuCostado(Canvas canvas, GraphicsContext contextoCanvas) {
 		Image MOSAICO2 = new Image(getClass().getResourceAsStream("res/mosaico1.png"), 500, 20, false, false);
 		Image MOSAICO3 = new Image(getClass().getResourceAsStream("res/mosaico1.png"), 20, 900, false, false);
@@ -338,19 +329,15 @@ public void terminarPartida(String nombre_ganador) {
 		
 		contextoCanvas.drawImage(Fondo3, 20, 0, 360, 100, 20, 690, 100, 40);
 		contextoCanvas.setFill(Color.BLACK);
-//		contextoCanvas.drawImage(Fondo, 20, 0, 360, 100, 20, 20, 360, 100);
 
 		
 		
 		contextoCanvas.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.ITALIC, 60.0));
-//		contextoCanvas.setFill(Color.BLACK);
 		contextoCanvas.fillText("Stratego", 60.0, 80.0);
 
 	}
 	
 	public void dibujarAviso(String aviso, GraphicsContext contextoCanvas) {
-//		contextoCanvas.setFill(Color.RED);
-//		contextoCanvas.scale(10, 10);
 		contextoCanvas.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.REGULAR, 15.0));
 		contextoCanvas.fillText(aviso, 25, 150);
 		
@@ -361,24 +348,10 @@ public void terminarPartida(String nombre_ganador) {
 		Media sound = new Media(getClass().getResource(sonido).toExternalForm());
     	new MediaPlayer(sound).play();
 	}
+
 	
-//	public void insertarSonidoInvalido() {
-//		Media sound = new Media(getClass().getResource("res/invalid.wav").toExternalForm());
-//    	new MediaPlayer(sound).play();
-//	}
-	
-//	public void insertarSonidoGuardar() {
-//		
-//		Media sound = new Media(getClass().getResource("res/sonidoGuardar.wav").toExternalForm());
-//    	new MediaPlayer(sound).play();
-//	}
-//	public void insertarSonidoEstrategia() {
-//		Media sound = new Media(getClass().getResource("res/done.wav").toExternalForm());
-//    	new MediaPlayer(sound).play();
-//	}
-//	
-	
-	
+	//Esta función se encarga de dibujar el menú principal de juego con los respectivos botones, para inciar cualquier tipo de partida
+	//o para cargar una partoda guardada.
 	public void dibujarMenu(Stage escenario)     {
 		
 		Image Fondo2 = new Image(getClass().getResourceAsStream("res/Fondo.png"), 800, 1200, true, true);
@@ -387,12 +360,10 @@ public void terminarPartida(String nombre_ganador) {
 		botonJugador = new Button("Partida contra jugador");
 		botonComputadora = new Button("Partida contra IA");
 		botonCargarPartidaContraJugador = new Button("Cargar partida");
-//		botonCargarPartidaContraIA = new Button("Cargar partida contra IA");
 		StackPane root = new StackPane();
 		root.getChildren().addAll(Fondo);
 		root.getChildren().add(label);
 		root.getChildren().add(botonJugador);
-//		root.getChildren().add(botonCargarPartidaContraIA);
 
 		root.getChildren().add(botonComputadora);
 		root.getChildren().add(botonCargarPartidaContraJugador);
@@ -403,7 +374,6 @@ public void terminarPartida(String nombre_ganador) {
 		botonJugador.setTranslateY(-100);
 		botonComputadora.setTranslateY(-50);
 		botonCargarPartidaContraJugador.setTranslateY(0);
-//		botonCargarPartidaContraIA.setTranslateY(50);
 		Scene scene = new Scene(root);
 		escenario.setTitle("Menu principal");
 		escenario.setResizable(true);
@@ -420,54 +390,9 @@ public void terminarPartida(String nombre_ganador) {
 	public void empezarPartidaContraIA(EventHandler<MouseEvent> eventHandler) {
 		botonComputadora.setOnMouseClicked(eventHandler);
 	}
-//	public void cargarPartidaContraJugador(EventHandler<MouseEvent>eventHandler) {
-//		botonCargarPartidaContraJugador.setOnMouseClicked(eventHandler);
-//	}
 
-	public void dibujarMenuNombres(Stage escenario) {
-		
-		Label label1 = new Label("Nombre Jugador2");
-		Label label2 = new Label("Nombre Jugador1");
-		campoNombre1 = new TextField();
-		campoNombre2 = new TextField();
-		botonIngresarNombres = new Button("Ingresar");
-		StackPane root = new StackPane();
-		
-		root.getChildren().add(botonIngresarNombres);
-		root.getChildren().add(campoNombre1);
-		root.getChildren().add(campoNombre2);
-		root.getChildren().add(label1);
-		root.getChildren().add(label2);
-		
-		label1.setTranslateX(25);
-		label1.setTranslateY(30);
-		label2.setTranslateX(-90);
-		label2.setTranslateY(-10);
-		
-		campoNombre1.setTranslateX(90);
-		campoNombre1.setTranslateY(50);
-		campoNombre2.setTranslateX(-82);
-		campoNombre2.setTranslateY(10);
-		
-		botonIngresarNombres.setTranslateY(100);
-		botonIngresarNombres.setTranslateX(200);
-		
-		Scene scene = new Scene(root);
-		escenario.setWidth(500);
-		escenario.setHeight(250);
-		escenario.setTitle("Ingrese los nombres");
-		escenario.setScene(scene);
-		escenario.show();
-	}
-	
 
-	public String obtenerNombre1() {
-		return campoNombre1.getText();
-	}
 	
-	public String obtenerNombre2() {
-		return campoNombre2.getText();
-	}
 	public void apretarIngresarNombres(EventHandler<MouseEvent> eventHandler) {
 		botonIngresarNombres.setOnMouseClicked(eventHandler);
 	}
@@ -475,14 +400,11 @@ public void terminarPartida(String nombre_ganador) {
 	public void apretarCargarPartida(EventHandler<MouseEvent> eventHandler) {
 		botonCargarPartidaContraJugador.setOnMouseClicked(eventHandler);
 	}
-//	public void apretarCargarPartidaContraIA(EventHandler<MouseEvent> eventHandler) {
-//		botonCargarPartidaContraIA.setOnMouseClicked(eventHandler);
-//	}
+
 	
-	//ponele inicializar escena de nombre
+	//Esta función inicializa la escena
 	public void inicializarCanvas() {
 		
-		//CANVAS TITULO
 		Canvas canvasMenuCostado = new Canvas(400, 800);	
     	GraphicsContext contextoCanvasMenuCostado = canvasMenuCostado.getGraphicsContext2D();
 		
@@ -523,19 +445,14 @@ public void terminarPartida(String nombre_ganador) {
     	this.scene = new Scene(group, ANCHO_ESCENA, ALTO_ESCENA);
 	}
 
-	public void mostrarMenu() {
-//		this.stage = stage;
-		dibujarMenuNombres(stage);
-	}
+
 	
 	
-	
+	//Esta función se encarga de ir actualizando la pantalla a medida que se van generando cambios
     public void render() {
-//    	System.out.print(String.format("Entra a render\n"));
     	contextoCanvasTablero.clearRect(0, 0, canvasTablero.getWidth(), canvasTablero.getHeight());
     	contextoCanvasAvisos.clearRect(0, 0, canvasAvisos.getWidth(), canvasAvisos.getHeight());
     	
-//    	dibujarMenuDeArriba(stage);
     	dibujarTablero(partida.obtenerTablero(), contextoCanvasTablero);
     	dibujarAviso(aviso, contextoCanvasAvisos);
     	
@@ -562,28 +479,8 @@ public void terminarPartida(String nombre_ganador) {
 	public boolean chequeaJugador1() {
 		return true;
 	}
-	
-	public boolean jugador1TerminoEstrategia() {
-		
-		return false;
-	}
-	
-	public boolean jugador2TerminoEstrategia() {
-		return false;
-	}
+
+
 
 }
 
-/*canvasTablero.setOnMouseClicked(new EventHandler<MouseEvent>() {
-@Override
-public void handle(MouseEvent event) {
-	double x = event.getX();
-	double y = event.getY();
-    System.out.println(String.format("x: %f , y: %f", x, y));
-    int i = obtenerIndiceTablero(x);
-    int j = obtenerIndiceTablero(y);
-    System.out.println(String.format("i: %d , j: %d", i, j));
-    
-    partida.realizarMovimiento(i, j);
-}
-});*/

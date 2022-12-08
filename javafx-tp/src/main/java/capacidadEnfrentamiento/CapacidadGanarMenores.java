@@ -6,6 +6,10 @@ public class CapacidadGanarMenores implements CapacidadEnfrentamiento , java.io.
 	
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	//Está función retorna el resultado de un enfrentamiento de dos piezas. Retorna que perdió si el valor de la otra pieza es mayor, 
+	//que ganó si la otra pieza tiene menor valor o que empató si tienen el mismo valor.
 	public ResultadoEnfrentamiento enfrentar(Ficha ficha, Ficha fichaOponente) {
 		if (ficha.obtenerValor() < fichaOponente.obtenerValor()) {
 			ficha.obtenerJugador().perderFicha(ficha);

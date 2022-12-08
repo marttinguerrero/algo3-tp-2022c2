@@ -7,6 +7,9 @@ public class CapacidadGanarMenoresYBomba implements CapacidadEnfrentamiento , ja
 	private static final long serialVersionUID = 1L;
 
 
+	
+	//Está función devuelve el resultado del enfrentamiento de dos piezas, retorna que perdió si el valor de la otra pieza es mayor, que empató
+	//si tienen el mismo valor o que ganó si es una bomba o tiene mayor valor.
 	public ResultadoEnfrentamiento enfrentar(Ficha ficha, Ficha fichaOponente) {
 		if (fichaOponente.obtenerValor() == TipoDeFicha.BOMBA.valor || ficha.obtenerValor() > fichaOponente.obtenerValor()) {
 			fichaOponente.obtenerJugador().perderFicha(fichaOponente);
