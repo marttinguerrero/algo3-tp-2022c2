@@ -4,10 +4,17 @@ import partida. *;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import excepciones.ExcepcionMovimientoInvalido;
 import excepciones.ExcepcionPosicionInvalida;
 import excepciones.ExcepcionTurnoEquivocado;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 
 
 public class Controlador {
@@ -75,12 +82,12 @@ public class Controlador {
 			else {
 				try {					
 					partida.moverFicha(casillaSelecionada[1], casillaSelecionada[0], posY, posX);
+					if (partida.huboEnfrentamiento() != null) {
+						vista.avisarEnfrentamiento(partida.huboEnfrentamiento());
+					}
 					if(partida instanceof PartidaContraComputadora) {
 						esTurnoIA = true;
 						
-					}
-					if (partida.huboEnfrentamiento() != null) {
-						vista.avisarEnfrentamiento(partida.huboEnfrentamiento());
 					}
 					
 				} catch (ExcepcionPosicionInvalida e) {
@@ -114,10 +121,10 @@ public class Controlador {
 		//En el tablero para mover la piezas y en el menú de costado para guardar las estrategias o la partida.
 		
 		public void iniciarPartida() {
-		    
-	    	
+		    	    
 	    	vista.inicializarCanvas();
 	    	vista.render();
+	    	
 	    	vista.agregarEventoDeMouse(event -> {
 	    		double x = event.getX();
 	        	double y = event.getY();
@@ -126,23 +133,37 @@ public class Controlador {
 	            int j = obtenerIndiceTablero(y);
 	                
 	            seleccionarCasilla(i, j);
-	            if (partida.hayGanador() != null) {
-	            	vista.terminarPartida(partida.hayGanador());
-	            }
 	            vista.render();
-	                
-	             
+	            
 	            if(partida instanceof PartidaContraComputadora && esTurnoIA == true) {
-	            	partida.moverFicha(-1, -1, -1, -1);
-	            	vista.render();
-	            	esTurnoIA = false;
-	            	try {
-	            		vista.generarRetraso();
-	            	} catch (InterruptedException e) {
-	            		e.printStackTrace();
-	            	}
+	            	var t = new Timer();
+	            	t.schedule(new TimerTask() {
+	            		@Override
+	            		public void run() {
+	            			Platform.runLater(new Runnable() {
+	                            @Override public void run() {
+	                            	partida.moverFicha(-1, -1, -1, -1);
+	    	    	            	if (partida.huboEnfrentamiento() != null) {
+	    	    						vista.avisarEnfrentamiento(partida.huboEnfrentamiento());
+	    	    					}
+	    	    	            	vista.render();
+	    	    	            	esTurnoIA = false;
+	                            }
+	                        });
+	    	            }
+	            	}, 1000);
 	            }
-	        });
+	                
+	    	});
+//	            if(partida instanceof PartidaContraComputadora && esTurnoIA == true) {
+//	            	partida.moverFicha(-1, -1, -1, -1);
+//	            	if (partida.huboEnfrentamiento() != null) {
+//						vista.avisarEnfrentamiento(partida.huboEnfrentamiento());
+//					}
+//	            	vista.render();
+//	            	esTurnoIA = false;
+//	            }
+	            
 	    	
 	    	if ((!jugadorEstrategia1 || ((!(partida instanceof PartidaContraComputadora)) && (!jugadorEstrategia2)))) {
 	    		
@@ -155,10 +176,16 @@ public class Controlador {
 		    		
 		            if(i == 0 && j==2 ) {		      
 		            	jugadorEstrategia1 = true;
-		            	partida.actualizarTurno();
 		            	vista.render();
 		                vista.insertarSonido(sonidoEstrategia);
-	                }else if((i == 0 && j==6 )  || (partida instanceof PartidaContraComputadora)){
+		                if (partida instanceof PartidaContraComputadora) {
+	                		jugadorEstrategia2 = true;
+		            		vista.render();
+	                	} else {
+	                		partida.actualizarTurno();
+	                		vista.render();
+	                	}
+	                }else if((i == 0 && j==6 )){
 		            	jugadorEstrategia2 = true;
 		            	partida.actualizarTurno();
 		            	vista.render();
@@ -202,10 +229,3 @@ public class Controlador {
 	    	}
   		}
 }
-	    		
-  			    		
-
-    	
-
-    
-

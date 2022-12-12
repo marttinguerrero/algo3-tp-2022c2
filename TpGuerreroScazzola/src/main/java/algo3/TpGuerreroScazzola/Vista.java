@@ -133,8 +133,11 @@ public class Vista{
 	
 	private Image obtenerImagenDeFicha(TipoDeFicha tipoDeFicha, ficha.Color color) {
 		
+
+		
+		
 		if (color.equals(ficha.Color.AZUL)) {
-			if (partida.esTurnoAzules()) {
+			if (partida.esTurnoAzules() || partida instanceof PartidaContraComputadora) {
 				return EN_BLANCO_AZUL;
 			}
 			switch (tipoDeFicha) {
@@ -169,6 +172,7 @@ public class Vista{
 		
 		
 		
+
 		if (color.equals(ficha.Color.VERDE)){
 			if (!partida.esTurnoAzules()) {
 				return EN_BLANCO_VERDE;
@@ -318,11 +322,14 @@ public class Vista{
 		contextoCanvas.drawImage(MOSAICO3, 0, 50, 20, 800, 380, 0, 20, 800);
 		contextoCanvas.drawImage(MOSAICO4, 20, 0, 360, 100, 20, 20, 360, 100);
 
+
 		contextoCanvas.drawImage(Fondo1, 20, 0, 360, 100, 20, 150, 50, 50);
 		contextoCanvas.drawImage(TerminarEstrategia2, 20, 0, 360, 100, 80, 150, 150, 40);
 		
-		contextoCanvas.drawImage(Fondo2, 20, 0, 360, 100, 20, 500, 50, 50);
-		contextoCanvas.drawImage(TerminarEstrategia1, 20, 0, 360, 100, 80, 500, 150, 40);
+		if (!(partida instanceof PartidaContraComputadora)) {
+			contextoCanvas.drawImage(Fondo2, 20, 0, 360, 100, 20, 500, 50, 50);
+			contextoCanvas.drawImage(TerminarEstrategia1, 20, 0, 360, 100, 80, 500, 150, 40);
+		}
 		
 		
 		contextoCanvas.drawImage(Fondo3, 20, 0, 360, 100, 20, 690, 100, 40);

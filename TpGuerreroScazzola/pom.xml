@@ -66,7 +66,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>algo3.javafx_tp.App</mainClass>
+                            <mainClass>algo3.TpGuerreroScazzola.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>

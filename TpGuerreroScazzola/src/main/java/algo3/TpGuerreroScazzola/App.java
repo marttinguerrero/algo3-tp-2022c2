@@ -5,6 +5,7 @@ package algo3.TpGuerreroScazzola;
 
 import javafx.application.Application;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import partida. *;
 
@@ -21,9 +22,9 @@ public class App extends Application {
 	String sonido = "res/sonidoFondo.wav";
 
     public void start(Stage stage) {
-//    	sound = new Media(getClass().getResource(sonido).toExternalForm());
-//    	new MediaPlayer(sound).setAutoPlay(true);
-//    	new MediaPlayer(sound).play();
+    	sound = new Media(getClass().getResource(sonido).toExternalForm());
+    	new MediaPlayer(sound).setAutoPlay(true);
+    	new MediaPlayer(sound).play();
     	Vista vista = new Vista(stage);
 //    	vista.insertarSonido(sonido);
     	Controlador controlador = new Controlador(vista);
