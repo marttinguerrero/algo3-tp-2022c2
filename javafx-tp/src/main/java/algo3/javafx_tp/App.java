@@ -23,8 +23,8 @@ public class App extends Application {
 
     public void start(Stage stage) {
     	sound = new Media(getClass().getResource(sonido).toExternalForm());
-//    	new MediaPlayer(sound).setAutoPlay(true);
-//    	new MediaPlayer(sound).play();
+    	new MediaPlayer(sound).setAutoPlay(true);
+    	new MediaPlayer(sound).play();
     	Vista vista = new Vista(stage);
     	Controlador controlador = new Controlador(vista);
     	vista.dibujarMenu(stage);
