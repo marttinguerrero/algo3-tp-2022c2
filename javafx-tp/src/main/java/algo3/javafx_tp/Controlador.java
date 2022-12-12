@@ -4,16 +4,12 @@ import partida. *;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import excepciones.ExcepcionMovimientoInvalido;
 import excepciones.ExcepcionPosicionInvalida;
 import excepciones.ExcepcionTurnoEquivocado;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 
 
@@ -35,7 +31,8 @@ public class Controlador {
 		this.vista = vista;
 	}
 	
-	public void cargarPartidaEnControlador(Partida partida) {
+	@SuppressWarnings("static-access")
+	public void cargarPartidaEnControlador(@SuppressWarnings("exports") Partida partida) {
 		this.partida = partida;
 	}
 		
@@ -44,6 +41,7 @@ public class Controlador {
 	//Ante cualquier movimiento inválido salta el aviso, sino se mueve la pieza indicando si se come alguna pieza.
 	
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public void seleccionarCasilla(int posX, int posY) {
 		if (casillaSelecionada == null) {
 			casillaSelecionada = new int[2];

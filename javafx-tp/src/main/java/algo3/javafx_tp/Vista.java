@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -55,8 +54,6 @@ public class Vista{
 	
 	//DIMENSIONES Y UBICACION EN ESCENA DE: MENU DEL COSTADO
 	private final int ANCHO_MENU_COSTADO = 400;
-	private final int ALTO_MENU_COSTADO = ALTO_ESCENA;
-	private final int UBICACION_X_MENU_COSTADO =  TAM_CANVAS_TABLERO;
 	
 	//DIMENSIONES Y UBICACION EN LA ESCENA DE: VENTANA DE AVISOS
 	private final int ANCHO_CANVAS_AVISOS = ANCHO_MENU_COSTADO;
@@ -100,9 +97,6 @@ public class Vista{
 	private final Image DIEZ_VERDE = new Image(getClass().getResourceAsStream("res/DiezVerde.png"), TAM_CASILLA, TAM_CASILLA, false, false);
 	private final Image BOMBA_VERDE = new Image(getClass().getResourceAsStream("res/BombaVerde.png"), TAM_CASILLA, TAM_CASILLA, false, false);
 	
-	//TITULO
-	private final Image TITULO = new Image(getClass().getResourceAsStream("res/Titulo1.png"), 100, 400, false, false);
-	
 	Partida partida;
 	Stage stage;
 	Scene scene;
@@ -118,14 +112,11 @@ public class Vista{
 	GraphicsContext contextoCanvasAvisos;
 	String aviso;
 	String avisoEnfrentamiento;
-	private Group group;
-	
-	
-	public Vista(Stage stage) {
+	public Vista(@SuppressWarnings("exports") Stage stage) {
 		this.stage = stage;
 	}
 	
-	public void cargarPartidaEnVista(Partida partida) {
+	public void cargarPartidaEnVista(@SuppressWarnings("exports") Partida partida) {
 		this.partida = partida;
 	}
 	
@@ -230,7 +221,6 @@ public class Vista{
 		Group group = new Group();
 		group.getChildren().add(canvasFinDePartida);
 		
-		this.group = group;
 		this.scene = new Scene(group, 500, 500);
 		
 	}
@@ -305,7 +295,7 @@ public class Vista{
 
 	//Esta función dibuja el menu del costado en donde está el título del juego y las opciones de guardar estrategias de los jugadores 
 	//y de guardar la partida.
-	public void dibujarMenuCostado(Canvas canvas, GraphicsContext contextoCanvas) {
+	public void dibujarMenuCostado(@SuppressWarnings("exports") Canvas canvas, @SuppressWarnings("exports") GraphicsContext contextoCanvas) {
 		Image MOSAICO2 = new Image(getClass().getResourceAsStream("res/mosaico1.png"), 500, 20, false, false);
 		Image MOSAICO3 = new Image(getClass().getResourceAsStream("res/mosaico1.png"), 20, 900, false, false);
 		Image MOSAICO4 = new Image(getClass().getResourceAsStream("res/mosaico1.png"), 400, 100, false, false);
@@ -342,7 +332,7 @@ public class Vista{
 
 	}
 	
-	public void dibujarAviso(String aviso, GraphicsContext contextoCanvas) {
+	public void dibujarAviso(String aviso, @SuppressWarnings("exports") GraphicsContext contextoCanvas) {
 		contextoCanvas.setFont(Font.font("Verdana", FontWeight.LIGHT, FontPosture.REGULAR, 15.0));
 		contextoCanvas.fillText(aviso, 25, 150);
 		
@@ -357,7 +347,7 @@ public class Vista{
 	
 	//Esta función se encarga de dibujar el menú principal de juego con los respectivos botones, para inciar cualquier tipo de partida
 	//o para cargar una partoda guardada.
-	public void dibujarMenu(Stage escenario)     {
+	public void dibujarMenu(@SuppressWarnings("exports") Stage escenario)     {
 		
 		Image Fondo2 = new Image(getClass().getResourceAsStream("res/Fondo.png"), 800, 1200, true, true);
 		ImageView Fondo = new ImageView(Fondo2);
@@ -388,21 +378,21 @@ public class Vista{
 
     }
 
-	public void empezarPartidaContraJugador(EventHandler<MouseEvent> eventHandler) {
+	public void empezarPartidaContraJugador(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		botonJugador.setOnMouseClicked(eventHandler);
 	}
 	
-	public void empezarPartidaContraIA(EventHandler<MouseEvent> eventHandler) {
+	public void empezarPartidaContraIA(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		botonComputadora.setOnMouseClicked(eventHandler);
 	}
 
 
 	
-	public void apretarIngresarNombres(EventHandler<MouseEvent> eventHandler) {
+	public void apretarIngresarNombres(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		botonIngresarNombres.setOnMouseClicked(eventHandler);
 	}
 	
-	public void apretarCargarPartida(EventHandler<MouseEvent> eventHandler) {
+	public void apretarCargarPartida(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		botonCargarPartidaContraJugador.setOnMouseClicked(eventHandler);
 	}
 
@@ -446,7 +436,6 @@ public class Vista{
     	group.getChildren().add(canvasTablero);
     	group.getChildren().add(canvasAvisos);
     	
-    	this.group = group;
     	this.scene = new Scene(group, ANCHO_ESCENA, ALTO_ESCENA);
 	}
 
@@ -466,11 +455,11 @@ public class Vista{
         
     }
 	
-	public void agregarEventoDeMouse(EventHandler<MouseEvent> eventHandler) {
+	public void agregarEventoDeMouse(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		canvasTablero.setOnMouseClicked(eventHandler);
 	}
 	
-	public void agregarEventoMenuCostado(EventHandler<MouseEvent> eventHandler) {
+	public void agregarEventoMenuCostado(@SuppressWarnings("exports") EventHandler<MouseEvent> eventHandler) {
 		canvasMenuCostado.setOnMouseClicked(eventHandler);
 	}
 

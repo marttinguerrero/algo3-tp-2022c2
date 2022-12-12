@@ -21,7 +21,7 @@ public class App extends Application {
 	File f = new File("src/main/java/partidaContraJugador.csv");
 	String sonido = "res/sonidoFondo.wav";
 
-    public void start(Stage stage) {
+    public void start(@SuppressWarnings("exports") Stage stage) {
     	sound = new Media(getClass().getResource(sonido).toExternalForm());
     	new MediaPlayer(sound).setAutoPlay(true);
     	new MediaPlayer(sound).play();

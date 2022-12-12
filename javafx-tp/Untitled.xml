@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project javafx-tp">
-    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
-    <!--ANT 1.7 is required                                        -->
+<project default="create_run_jar" name="Create Runnable Jar for Project javafx-tp with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR file Export Wizard-->
+    <!--ANT 1.7 is required-->
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
     <property name="dir.workspace" value="${dir.buildfile}/.."/>
     <property name="dir.jarfile" value="${dir.buildfile}"/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/javacsv.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${dir.jarfile}/javacsv.jar">
             <manifest>
-                <attribute name="Main-Class" value="algo3.javafx_tp.App"/>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="algo3.javafx_tp.App"/>
                 <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ javafx-controls-19.jar javafx-controls-19-linux.jar javafx-graphics-19.jar javafx-media-19.jar javafx-media-19-linux.jar javafx-graphics-19-mac.jar javafx-base-19.jar javafx-base-19-linux.jar javafx-graphics-19-win.jar javafx-graphics-19-linux.jar"/>
             </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
             <fileset dir="${dir.jarfile}/target/classes"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.p2/pool/plugins/org.junit_4.13.2.v20211018-1956.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-controls/19/javafx-controls-19.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-controls/19/javafx-controls-19-linux.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19/javafx-graphics-19.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-media/19/javafx-media-19.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-media/19/javafx-media-19-linux.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19/javafx-graphics-19-mac.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-base/19/javafx-base-19.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-base/19/javafx-base-19-linux.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19/javafx-graphics-19-win.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19/javafx-graphics-19-linux.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-controls/19" includes="javafx-controls-19.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-controls/19" includes="javafx-controls-19-linux.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19" includes="javafx-graphics-19.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-media/19" includes="javafx-media-19.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-media/19" includes="javafx-media-19-linux.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19" includes="javafx-graphics-19-mac.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-base/19" includes="javafx-base-19.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-base/19" includes="javafx-base-19-linux.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19" includes="javafx-graphics-19-win.jar"/>
+            <zipfileset dir="/home/martin/.m2/repository/org/openjfx/javafx-graphics/19" includes="javafx-graphics-19-linux.jar"/>
         </jar>
     </target>
 </project>
