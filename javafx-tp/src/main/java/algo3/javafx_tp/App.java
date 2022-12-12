@@ -5,6 +5,7 @@ package algo3.javafx_tp;
 
 import javafx.application.Application;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import partida. *;
 
@@ -25,7 +26,6 @@ public class App extends Application {
 //    	new MediaPlayer(sound).setAutoPlay(true);
 //    	new MediaPlayer(sound).play();
     	Vista vista = new Vista(stage);
-//    	vista.insertarSonido(sonido);
     	Controlador controlador = new Controlador(vista);
     	vista.dibujarMenu(stage);
     	

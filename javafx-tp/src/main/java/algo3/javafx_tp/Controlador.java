@@ -133,6 +133,9 @@ public class Controlador {
 	            int j = obtenerIndiceTablero(y);
 	                
 	            seleccionarCasilla(i, j);
+	            if (partida.hayGanador() != null) {
+	            	vista.terminarPartida(partida.hayGanador());
+	            }
 	            vista.render();
 	            
 	            if(partida instanceof PartidaContraComputadora && esTurnoIA == true) {
@@ -155,15 +158,6 @@ public class Controlador {
 	            }
 	                
 	    	});
-//	            if(partida instanceof PartidaContraComputadora && esTurnoIA == true) {
-//	            	partida.moverFicha(-1, -1, -1, -1);
-//	            	if (partida.huboEnfrentamiento() != null) {
-//						vista.avisarEnfrentamiento(partida.huboEnfrentamiento());
-//					}
-//	            	vista.render();
-//	            	esTurnoIA = false;
-//	            }
-	            
 	    	
 	    	if ((!jugadorEstrategia1 || ((!(partida instanceof PartidaContraComputadora)) && (!jugadorEstrategia2)))) {
 	    		

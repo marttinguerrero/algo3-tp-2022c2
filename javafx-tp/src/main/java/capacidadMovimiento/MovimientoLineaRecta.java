@@ -39,7 +39,7 @@ public class MovimientoLineaRecta implements CapacidadMovimiento , java.io.Seria
 		
 		if (movimientosEnX == 0) {
 			for (int i = 0; i < (movimientosEnY - 1); i++) {
-				if (tablero.obtenerFicha(posXi , posYi + ((posYf - posYi) /java.lang.Math.abs(posYf - posYi)) + i) != Tablero.VACIO) {
+				if (tablero.obtenerFicha(posXi , posYi + ((posYf - posYi) /java.lang.Math.abs(posYf - posYi)) + i*((posYf - posYi) /java.lang.Math.abs(posYf - posYi))) != Tablero.VACIO) {
 					return false;
 				}
 			}

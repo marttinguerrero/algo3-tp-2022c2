@@ -53,17 +53,6 @@ public class PartidaTest {
 
 	}
 
-//	@Test
-//	public void testCargarPartida() throws IOException, ClassNotFoundException {
-//		File f = new File("src/main/java/partidaContraJugador.csv");
-//
-//		
-//		Partida partida2 = new Partida();
-//		partida2 = partida.cargarPartida(f, partida);
-//		
-//		assertEquals(partida,partida2);
-//
-//	}
 
 
 }
